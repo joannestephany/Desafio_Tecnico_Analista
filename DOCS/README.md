@@ -10,6 +10,8 @@ O arquivo `DER-DesafioTecnico-SergipeTec-2025.png` contém o diagrama de banco d
 - Estrutura das tabelas do sistema
 - Relacionamentos entre as entidades
 - Chaves primárias e estrangeiras
+  
+<img src="DER-DesafioTecnico-SergipeTec-2025.png" alt="DER" width="400">
 
 ### 🎨 Protótipo de Baixa Fidelidade
 
