@@ -22,6 +22,7 @@ public class Servidor {
     @Column(nullable = false, unique = true)
     private String matricula;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "servidor")
     private List<PeriodoFerias> periodosFerias;
 }

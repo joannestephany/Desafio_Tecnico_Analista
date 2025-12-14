@@ -18,6 +18,7 @@ public class StatusSolicitacao {
     @Column(nullable = false)
     private String descricao;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "status")
     private List<PeriodoFerias> periodosFerias;
 }
