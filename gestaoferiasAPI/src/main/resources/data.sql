@@ -1,13 +1,15 @@
 
 -- SERVIDOR
 INSERT INTO servidor (id, nome, matricula) VALUES
-(1, 'João da Silva', '123456');
+(1, 'João da Silva', '123456'),
+(2, 'Maria da Graça', '654321');
 
 -- STATUS
 INSERT INTO status_solicitacao (id, descricao) VALUES
 (1, 'Solicitado'),
 (2, 'Aprovado'),
-(3, 'Concluído');
+(3, 'Concluído'),
+(4, 'Negado');
 
 -- PERIODO DE FÉRIAS
 INSERT INTO periodo_ferias (id, data_inicio, data_fim, servidor_id, status_id) VALUES
