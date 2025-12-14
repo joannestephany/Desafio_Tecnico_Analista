@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/ferias")
 public class FeriasController {
@@ -19,7 +20,7 @@ public class FeriasController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<List<FeriasResumoDTO>> listar() {
         return ResponseEntity.ok(service.listarTodos());
     }
@@ -27,6 +28,27 @@ public class FeriasController {
     @GetMapping("/{id}")
     public ResponseEntity<FeriasInfosDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
+    @GetMapping(params = "status")
+    public ResponseEntity<List<FeriasResumoDTO>> buscarPorStatus(
+            @RequestParam String status) {
+
+        return ResponseEntity.ok(service.buscarPorStatus(status));
+    }
+
+    @GetMapping("/servidor/{servidorId}")
+    public ResponseEntity<List<FeriasResumoDTO>> listarPorServidor(
+            @PathVariable Long servidorId) {
+        return ResponseEntity.ok(service.listarPorServidor(servidorId));
+    }
+
+    @GetMapping("/servidor/{servidorId}/status/{status}")
+    public ResponseEntity<List<FeriasResumoDTO>> listarPorServidorEStatus(
+            @PathVariable Long servidorId,
+            @PathVariable String status) {
+        return ResponseEntity.ok(
+                service.listarPorServidorEStatus(servidorId, status));
     }
 
     @PostMapping
