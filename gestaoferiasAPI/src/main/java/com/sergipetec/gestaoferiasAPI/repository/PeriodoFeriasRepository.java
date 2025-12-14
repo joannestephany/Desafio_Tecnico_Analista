@@ -9,4 +9,11 @@ public interface PeriodoFeriasRepository
         extends JpaRepository<PeriodoFerias, Long> {
 
     List<PeriodoFerias> findByServidorId(Long servidorId);
+    List<PeriodoFerias> findByStatusDescricaoIgnoreCase(String descricao);
+    List<PeriodoFerias> findByServidorIdAndStatusDescricaoIgnoreCase(
+            Long servidorId,
+            String descricao
+    );
+
+
 }

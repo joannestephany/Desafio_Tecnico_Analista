@@ -1,0 +1,13 @@
+package com.sergipetec.gestaoferiasAPI.repository;
+
+import com.sergipetec.gestaoferiasAPI.entity.Pagamento;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
+
+    Optional<Pagamento> findByPeriodoId(Long periodoId);
+
+    boolean existsByPeriodoId(Long periodoId);
+}
