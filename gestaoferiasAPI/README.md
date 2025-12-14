@@ -29,14 +29,17 @@ Isso iniciará:
 # 1. Acesse a pasta do backend
 cd gestaoferiasAPI
 
-# 2. Configure o MySQL local (variáveis de ambiente)
+# 2. (Opcional) Se os arquivos mvnw/mvnw.cmd estiverem faltando, gere-os:
+mvn wrapper:wrapper
+
+# 3. Configure o MySQL local (variáveis de ambiente)
 export MYSQL_HOST=localhost
 export MYSQL_PORT=3306
 export MYSQL_USER=root
 export MYSQL_PASSWORD=sua_senha
-
-# 3. Execute a aplicação
-./mvnw clean spring-boot:run
+# 4. Execute a aplicação
+./mvnw clean spring-boot:run        # Linux/Mac
+.\mvnw.cmd clean spring-boot:run    # Windows
 ```
 
 A API estará disponível em: **http://localhost:8080**
