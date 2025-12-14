@@ -1,6 +1,9 @@
 # Desafio Técnico - Sistema de Gestão de Férias
 
-Sistema completo de gestão de férias para servidores públicos, desenvolvido como prova técnica.
+Sistema completo de gestão de férias para servidores, desenvolvido como prova técnica.
+
+<img src="DashboardScreenshoot.png" alt="Dashboard Screenshoot" width="800">
+
 
 ## 📁 Estrutura do Repositório
 
