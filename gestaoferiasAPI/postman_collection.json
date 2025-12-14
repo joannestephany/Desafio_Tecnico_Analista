@@ -1,0 +1,839 @@
+{
+    "info": {
+        "_postman_id": "gestao-ferias-api-collection",
+        "name": "Gestão de Férias API",
+        "description": "Documentação completa da API de Gestão de Férias desenvolvida com Java 17 e Spring Boot 3.\n\n## Base URL\n- Local: `http://localhost:8080`\n- Docker: `http://localhost:8080`\n\n## Autenticação\nA API atualmente não requer autenticação.\n\n## Recursos\n- **Servidores**: Gerenciamento de funcionários\n- **Férias**: Gerenciamento de períodos de férias\n- **Pagamentos**: Informações financeiras\n- **Status**: Tipos de status de solicitação",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Servidores",
+            "description": "Endpoints para gerenciamento de servidores (funcionários)",
+            "item": [
+                {
+                    "name": "Listar todos os servidores",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/servidores",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "servidores"
+                            ]
+                        },
+                        "description": "Retorna a lista completa de todos os servidores cadastrados no sistema."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"nome\": \"João Silva\",\n    \"matricula\": \"SRV001\"\n  },\n  {\n    \"id\": 2,\n    \"nome\": \"Maria Santos\",\n    \"matricula\": \"SRV002\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Buscar servidor por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/servidores/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "servidores",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do servidor"
+                                }
+                            ]
+                        },
+                        "description": "Retorna os detalhes de um servidor específico pelo seu ID."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"nome\": \"João Silva\",\n  \"matricula\": \"SRV001\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Buscar servidor por matrícula",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/servidores/matricula/:matricula",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "servidores",
+                                "matricula",
+                                ":matricula"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "matricula",
+                                    "value": "SRV001",
+                                    "description": "Matrícula do servidor (usado para login)"
+                                }
+                            ]
+                        },
+                        "description": "Busca um servidor pela sua matrícula. Este endpoint é utilizado para a funcionalidade de login."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"nome\": \"João Silva\",\n  \"matricula\": \"SRV001\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar férias de um servidor",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/servidores/:id/ferias",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "servidores",
+                                ":id",
+                                "ferias"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do servidor"
+                                }
+                            ]
+                        },
+                        "description": "Retorna todos os períodos de férias de um servidor específico."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"nomeServidor\": \"João Silva\",\n    \"status\": \"Aprovado\",\n    \"dataInicio\": \"2024-01-15\",\n    \"dataFim\": \"2024-01-30\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Criar novo servidor",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nome\": \"Carlos Oliveira\",\n  \"matricula\": \"SRV003\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/servidores",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "servidores"
+                            ]
+                        },
+                        "description": "Cadastra um novo servidor no sistema."
+                    },
+                    "response": [
+                        {
+                            "name": "Criado com sucesso",
+                            "status": "Created",
+                            "code": 201,
+                            "body": "{\n  \"id\": 3,\n  \"nome\": \"Carlos Oliveira\",\n  \"matricula\": \"SRV003\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Atualizar servidor",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nome\": \"Carlos Oliveira Silva\",\n  \"matricula\": \"SRV003\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/servidores/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "servidores",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do servidor a ser atualizado"
+                                }
+                            ]
+                        },
+                        "description": "Atualiza os dados de um servidor existente."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"nome\": \"Carlos Oliveira Silva\",\n  \"matricula\": \"SRV003\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Deletar servidor",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/servidores/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "servidores",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do servidor a ser removido"
+                                }
+                            ]
+                        },
+                        "description": "Remove um servidor do sistema."
+                    },
+                    "response": [
+                        {
+                            "name": "Removido com sucesso",
+                            "status": "No Content",
+                            "code": 204,
+                            "body": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Férias",
+            "description": "Endpoints para gerenciamento de períodos de férias",
+            "item": [
+                {
+                    "name": "Listar todas as férias",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias"
+                            ]
+                        },
+                        "description": "Retorna a lista completa de todos os períodos de férias cadastrados."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"nomeServidor\": \"João Silva\",\n    \"status\": \"Aprovado\",\n    \"dataInicio\": \"2024-01-15\",\n    \"dataFim\": \"2024-01-30\"\n  },\n  {\n    \"id\": 2,\n    \"nomeServidor\": \"Maria Santos\",\n    \"status\": \"Solicitado\",\n    \"dataInicio\": \"2024-02-01\",\n    \"dataFim\": \"2024-02-15\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Buscar férias por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do período de férias"
+                                }
+                            ]
+                        },
+                        "description": "Retorna os detalhes completos de um período de férias, incluindo informações de pagamento se existirem."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"nomeServidor\": \"João Silva\",\n  \"status\": \"Aprovado\",\n  \"dataInicio\": \"2024-01-15\",\n  \"dataFim\": \"2024-01-30\",\n  \"pagamento\": {\n    \"id\": 1,\n    \"tipoPagamento\": \"ADIANTAMENTO\",\n    \"valorBruto\": 5000.00,\n    \"valorLiquido\": 4500.00,\n    \"dataPagamento\": \"2024-01-10\"\n  }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Filtrar férias por status",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias?status=Solicitado",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias"
+                            ],
+                            "query": [
+                                {
+                                    "key": "status",
+                                    "value": "Solicitado",
+                                    "description": "Status das férias (Solicitado, Aprovado, Concluído, Negado)"
+                                }
+                            ]
+                        },
+                        "description": "Filtra os períodos de férias por status. Status disponíveis: Solicitado, Aprovado, Concluído, Negado."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 2,\n    \"nomeServidor\": \"Maria Santos\",\n    \"status\": \"Solicitado\",\n    \"dataInicio\": \"2024-02-01\",\n    \"dataFim\": \"2024-02-15\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar férias por servidor",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias/servidor/:servidorId",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias",
+                                "servidor",
+                                ":servidorId"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "servidorId",
+                                    "value": "1",
+                                    "description": "ID do servidor"
+                                }
+                            ]
+                        },
+                        "description": "Retorna todos os períodos de férias de um servidor específico."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"nomeServidor\": \"João Silva\",\n    \"status\": \"Aprovado\",\n    \"dataInicio\": \"2024-01-15\",\n    \"dataFim\": \"2024-01-30\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Listar férias por servidor e status",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias/servidor/:servidorId/status/:status",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias",
+                                "servidor",
+                                ":servidorId",
+                                "status",
+                                ":status"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "servidorId",
+                                    "value": "1",
+                                    "description": "ID do servidor"
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "Aprovado",
+                                    "description": "Status das férias"
+                                }
+                            ]
+                        },
+                        "description": "Retorna os períodos de férias de um servidor filtrados por status específico."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"nomeServidor\": \"João Silva\",\n    \"status\": \"Aprovado\",\n    \"dataInicio\": \"2024-01-15\",\n    \"dataFim\": \"2024-01-30\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Solicitar férias",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"servidor\": {\n    \"id\": 1\n  },\n  \"status\": {\n    \"id\": 1\n  },\n  \"dataInicio\": \"2024-03-01\",\n  \"dataFim\": \"2024-03-15\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias"
+                            ]
+                        },
+                        "description": "Cria uma nova solicitação de férias. O status inicial deve ser 'Solicitado' (id: 1)."
+                    },
+                    "response": [
+                        {
+                            "name": "Criado com sucesso",
+                            "status": "Created",
+                            "code": 201,
+                            "body": "{\n  \"id\": 3,\n  \"servidor\": {\n    \"id\": 1,\n    \"nome\": \"João Silva\",\n    \"matricula\": \"SRV001\"\n  },\n  \"status\": {\n    \"id\": 1,\n    \"nome\": \"Solicitado\"\n  },\n  \"dataInicio\": \"2024-03-01\",\n  \"dataFim\": \"2024-03-15\",\n  \"pagamento\": null\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Atualizar férias",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"servidor\": {\n    \"id\": 1\n  },\n  \"status\": {\n    \"id\": 2\n  },\n  \"dataInicio\": \"2024-03-01\",\n  \"dataFim\": \"2024-03-20\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do período de férias"
+                                }
+                            ]
+                        },
+                        "description": "Atualiza um período de férias existente. Pode ser usado para alterar datas ou status (aprovar, negar, concluir)."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"servidor\": {\n    \"id\": 1,\n    \"nome\": \"João Silva\",\n    \"matricula\": \"SRV001\"\n  },\n  \"status\": {\n    \"id\": 2,\n    \"nome\": \"Aprovado\"\n  },\n  \"dataInicio\": \"2024-03-01\",\n  \"dataFim\": \"2024-03-20\",\n  \"pagamento\": null\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Cancelar/Deletar férias",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ferias/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "ferias",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do período de férias"
+                                }
+                            ]
+                        },
+                        "description": "Cancela/remove um período de férias do sistema."
+                    },
+                    "response": [
+                        {
+                            "name": "Removido com sucesso",
+                            "status": "No Content",
+                            "code": 204,
+                            "body": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Pagamentos",
+            "description": "Endpoints para gerenciamento de pagamentos de férias",
+            "item": [
+                {
+                    "name": "Listar todos os pagamentos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/pagamentos",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pagamentos"
+                            ]
+                        },
+                        "description": "Retorna a lista completa de todos os pagamentos registrados."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"tipoPagamento\": \"ADIANTAMENTO\",\n    \"valorBruto\": 5000.00,\n    \"valorLiquido\": 4500.00,\n    \"dataPagamento\": \"2024-01-10\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Buscar pagamento por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/pagamentos/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pagamentos",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do pagamento"
+                                }
+                            ]
+                        },
+                        "description": "Retorna os detalhes de um pagamento específico."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"tipoPagamento\": \"ADIANTAMENTO\",\n  \"valorBruto\": 5000.00,\n  \"valorLiquido\": 4500.00,\n  \"dataPagamento\": \"2024-01-10\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Buscar pagamento por período",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/pagamentos/periodo/:periodoId",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pagamentos",
+                                "periodo",
+                                ":periodoId"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "periodoId",
+                                    "value": "1",
+                                    "description": "ID do período de férias"
+                                }
+                            ]
+                        },
+                        "description": "Retorna o pagamento associado a um período de férias específico."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"tipoPagamento\": \"ADIANTAMENTO\",\n  \"valorBruto\": 5000.00,\n  \"valorLiquido\": 4500.00,\n  \"dataPagamento\": \"2024-01-10\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Criar pagamento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"tipoPagamento\": \"ADIANTAMENTO\",\n  \"valorBruto\": 6000.00,\n  \"valorLiquido\": 5400.00,\n  \"dataPagamento\": \"2024-02-28\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/pagamentos?periodoId=1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pagamentos"
+                            ],
+                            "query": [
+                                {
+                                    "key": "periodoId",
+                                    "value": "1",
+                                    "description": "ID do período de férias ao qual o pagamento será vinculado"
+                                }
+                            ]
+                        },
+                        "description": "Registra um novo pagamento vinculado a um período de férias. Tipos de pagamento disponíveis: ADIANTAMENTO, REEMBOLSO."
+                    },
+                    "response": [
+                        {
+                            "name": "Criado com sucesso",
+                            "status": "Created",
+                            "code": 201,
+                            "body": "{\n  \"id\": 2,\n  \"tipoPagamento\": \"ADIANTAMENTO\",\n  \"valorBruto\": 6000.00,\n  \"valorLiquido\": 5400.00,\n  \"dataPagamento\": \"2024-02-28\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Atualizar pagamento",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"tipoPagamento\": \"REEMBOLSO\",\n  \"valorBruto\": 6500.00,\n  \"valorLiquido\": 5850.00,\n  \"dataPagamento\": \"2024-03-01\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/pagamentos/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pagamentos",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do pagamento"
+                                }
+                            ]
+                        },
+                        "description": "Atualiza os dados de um pagamento existente."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"tipoPagamento\": \"REEMBOLSO\",\n  \"valorBruto\": 6500.00,\n  \"valorLiquido\": 5850.00,\n  \"dataPagamento\": \"2024-03-01\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Deletar pagamento",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/pagamentos/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "pagamentos",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do pagamento"
+                                }
+                            ]
+                        },
+                        "description": "Remove um pagamento do sistema."
+                    },
+                    "response": [
+                        {
+                            "name": "Removido com sucesso",
+                            "status": "No Content",
+                            "code": 204,
+                            "body": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Status",
+            "description": "Endpoints para consulta de tipos de status de solicitação",
+            "item": [
+                {
+                    "name": "Listar todos os status",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/status",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "status"
+                            ]
+                        },
+                        "description": "Retorna todos os tipos de status disponíveis para solicitações de férias."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "[\n  {\n    \"id\": 1,\n    \"nome\": \"Solicitado\"\n  },\n  {\n    \"id\": 2,\n    \"nome\": \"Aprovado\"\n  },\n  {\n    \"id\": 3,\n    \"nome\": \"Concluído\"\n  },\n  {\n    \"id\": 4,\n    \"nome\": \"Negado\"\n  }\n]"
+                        }
+                    ]
+                },
+                {
+                    "name": "Buscar status por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/status/:id",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "status",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID do status"
+                                }
+                            ]
+                        },
+                        "description": "Retorna os detalhes de um tipo de status específico."
+                    },
+                    "response": [
+                        {
+                            "name": "Sucesso",
+                            "status": "OK",
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"nome\": \"Solicitado\"\n}"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
